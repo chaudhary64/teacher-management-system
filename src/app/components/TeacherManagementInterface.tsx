@@ -397,7 +397,9 @@ const TeacherManagementInterface: React.FC<TeacherManagementInterfaceProps> = ({
                     {teacher.name}
                   </h2>
                   <p className="text-gray-600 mb-2 text-sm sm:text-base">
-                    Music Teacher
+                    {Array.from(
+                      new Set(teacher.detailedSchedule.map((s) => s.subject))
+                    ).join(", ")}
                   </p>
                   <div className="flex items-center justify-center sm:justify-start space-x-1 mb-3">
                     {[...Array(5)].map((_, i) => (
