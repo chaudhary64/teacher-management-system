@@ -9,7 +9,7 @@ import {
   CalendarIcon,
 } from "@heroicons/react/24/outline";
 
-type Qualification = { name: string; rate: number };
+type Qualification = { name: string; institute: string };
 type ScheduleItem = {
   id: string;
   date: string;
@@ -30,7 +30,7 @@ const Page = () => {
     street: "",
     city: "",
     country: "",
-    qualifications: [{ name: "", rate: 0 }],
+    qualifications: [{ name: "", institute: "" }],
     detailedSchedule: [
       {
         id: "",
@@ -69,12 +69,10 @@ const Page = () => {
   const handleQualificationChange = (
     index: number,
     field: keyof Qualification,
-    value: string | number
+    value: string
   ) => {
     const updated = form.qualifications.map((q, i) =>
-      i === index
-        ? { ...q, [field]: field === "rate" ? Number(value) : value }
-        : q
+      i === index ? { ...q, [field]: value } : q
     );
     setForm({ ...form, qualifications: updated });
   };
@@ -82,7 +80,7 @@ const Page = () => {
   const addQualification = () => {
     setForm({
       ...form,
-      qualifications: [...form.qualifications, { name: "", rate: 0 }],
+      qualifications: [...form.qualifications, { name: "", institute: "" }],
     });
   };
 
@@ -152,7 +150,9 @@ const Page = () => {
           city: form.city,
           country: form.country,
         },
-        qualifications: form.qualifications.filter((q) => q.name && q.rate),
+        qualifications: form.qualifications.filter(
+          (q) => q.name && q.institute
+        ),
         detailedSchedule: form.detailedSchedule.filter(
           (s) => s.date && s.startTime && s.endTime && s.subject
         ),
@@ -165,7 +165,7 @@ const Page = () => {
       street: "",
       city: "",
       country: "",
-      qualifications: [{ name: "", rate: 0 }],
+      qualifications: [{ name: "", institute: "" }],
       detailedSchedule: [
         {
           id: "",
@@ -419,21 +419,20 @@ const Page = () => {
                           </div>
                           <div>
                             <label className="block text-sm font-medium text-gray-700 mb-2">
-                              Hourly Rate ($)
+                              Institute
                             </label>
                             <input
-                              type="number"
-                              placeholder="50"
-                              value={q.rate}
+                              type="text"
+                              placeholder="e.g., University of Toronto"
+                              value={q.institute}
                               onChange={(e) =>
                                 handleQualificationChange(
                                   i,
-                                  "rate",
+                                  "institute",
                                   e.target.value
                                 )
                               }
                               className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
-                              min={0}
                               required
                             />
                           </div>
@@ -653,8 +652,18 @@ const Page = () => {
         {success && (
           <div className="fixed bottom-6 right-6 z-50 animate-fade-in-up">
             <div className="bg-green-600 text-white rounded-xl shadow-lg px-6 py-4 flex items-center min-w-[250px]">
-              <svg className="w-7 h-7 text-white mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              <svg
+                className="w-7 h-7 text-white mr-3"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5 13l4 4L19 7"
+                />
               </svg>
               <div>
                 <div className="font-semibold text-base">Success!</div>
@@ -663,22 +672,22 @@ const Page = () => {
             </div>
           </div>
         )}
-      {/* Toast Animation Style */}
-      <style jsx global>{`
-        @keyframes fade-in-up {
-          0% {
-            opacity: 0;
-            transform: translateY(40px);
+        {/* Toast Animation Style */}
+        <style jsx global>{`
+          @keyframes fade-in-up {
+            0% {
+              opacity: 0;
+              transform: translateY(40px);
+            }
+            100% {
+              opacity: 1;
+              transform: translateY(0);
+            }
           }
-          100% {
-            opacity: 1;
-            transform: translateY(0);
+          .animate-fade-in-up {
+            animation: fade-in-up 0.4s cubic-bezier(0.4, 0, 0.2, 1);
           }
-        }
-        .animate-fade-in-up {
-          animation: fade-in-up 0.4s cubic-bezier(0.4,0,0.2,1);
-        }
-      `}</style>
+        `}</style>
       </div>
     </div>
   );

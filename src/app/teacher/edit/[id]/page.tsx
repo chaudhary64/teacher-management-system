@@ -14,12 +14,11 @@ const EditTeacherPage = () => {
   const { teachers, setTeachers } = useTeacherContext();
   const router = useRouter();
   const params = useParams();
-  // Route param is [id], so use params.id
   const teacherId = params?.id;
   const teacher = teachers.find((t) => t.id === teacherId);
 
   const [currentStep, setCurrentStep] = useState(1);
-  type Qualification = { name: string; rate: number };
+  type Qualification = { name: string; institute: string };
   type Schedule = {
     id: string;
     date: string;
@@ -46,7 +45,7 @@ const EditTeacherPage = () => {
     street: "",
     city: "",
     country: "",
-    qualifications: [{ name: "", rate: 0 }],
+    qualifications: [{ name: "", institute: "" }],
     detailedSchedule: [
       {
         id: "",
@@ -73,7 +72,7 @@ const EditTeacherPage = () => {
         qualifications:
           teacher.qualifications?.length > 0
             ? teacher.qualifications
-            : [{ name: "", rate: 0 }],
+            : [{ name: "", institute: "" }],
         detailedSchedule:
           teacher.detailedSchedule?.length > 0
             ? teacher.detailedSchedule
@@ -117,11 +116,11 @@ const EditTeacherPage = () => {
   const handleQualificationChange = (
     index: number,
     field: keyof Qualification,
-    value: string | number
+    value: string
   ) => {
     const updated = form.qualifications.map((q, i) =>
       i === index
-        ? { ...q, [field]: field === "rate" ? Number(value) : value }
+        ? { ...q, [field]: value }
         : q
     );
     setForm({ ...form, qualifications: updated });
@@ -130,7 +129,7 @@ const EditTeacherPage = () => {
   const addQualification = () => {
     setForm({
       ...form,
-      qualifications: [...form.qualifications, { name: "", rate: 0 }],
+      qualifications: [...form.qualifications, { name: "", institute: "" }],
     });
   };
 
@@ -201,7 +200,7 @@ const EditTeacherPage = () => {
                 country: form.country,
               },
               qualifications: form.qualifications.filter(
-                (q) => q.name && q.rate !== undefined
+                (q) => q.name && q.institute
               ),
               detailedSchedule: form.detailedSchedule.filter(
                 (s) =>
@@ -470,24 +469,23 @@ const EditTeacherPage = () => {
                           </div>
                           <div>
                             <label className="block text-sm font-medium text-gray-700 mb-2">
-                              Hourly Rate ($)
+                              Institute
                             </label>
                             <input
-                              type="number"
+                              type="text"
                               placeholder={
-                                teacher.qualifications?.[i]?.rate?.toString() ||
-                                "50"
+                                teacher.qualifications?.[i]?.institute ||
+                                "e.g., University of Toronto"
                               }
-                              value={q.rate}
+                              value={q.institute}
                               onChange={(e) =>
                                 handleQualificationChange(
                                   i,
-                                  "rate",
+                                  "institute",
                                   e.target.value
                                 )
                               }
                               className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
-                              min={0}
                               required
                             />
                           </div>

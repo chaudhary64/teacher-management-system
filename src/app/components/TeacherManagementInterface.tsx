@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTeacherContext } from "@/context/TeacherContext";
-// import { useTeacherContext } from "@/context/TeacherContext";
 import {
   User,
   Mail,
@@ -41,7 +40,7 @@ interface Teacher {
   };
   qualifications: {
     name: string;
-    rate: number;
+    institute: string;
   }[];
   detailedSchedule: ScheduleItem[];
 }
@@ -49,8 +48,6 @@ interface Teacher {
 interface TeacherManagementInterfaceProps {
   teacherInfo: Teacher;
 }
-
-// import { useTeacherContext } from "@/context/TeacherContext";
 
 const TeacherManagementInterface: React.FC<TeacherManagementInterfaceProps> = ({
   teacherInfo,
@@ -497,8 +494,8 @@ const TeacherManagementInterface: React.FC<TeacherManagementInterfaceProps> = ({
                         <span className="font-medium text-gray-900 text-sm truncate pr-2">
                           {qual.name}
                         </span>
-                        <span className="text-sm font-semibold text-green-600 flex-shrink-0">
-                          ${qual.rate.toFixed(2)}
+                        <span className="text-sm font-semibold text-blue-600 flex-shrink-0">
+                          {qual.institute}
                         </span>
                       </div>
                     ))}

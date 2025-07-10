@@ -12,7 +12,7 @@ type Teacher = {
 const TeacherPage = () => {
   const { teachers } = useTeacherContext();
   const params = useParams();
-  const teacherId = params?.id || params?.teacher; // support both /teacher/[id] and /teachers/[id]
+  const teacherId = params?.id || params?.teacher;
   const teacher = teachers.find((t: Teacher) => t.id === teacherId);
 
   if (!teacher) {
