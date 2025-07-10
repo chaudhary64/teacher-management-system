@@ -1,4 +1,3 @@
-
 "use client";
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
@@ -31,7 +30,6 @@ export type Teacher = {
   detailedSchedule: ScheduleItem[];
 };
 
-
 interface TeacherContextType {
   teachers: Teacher[];
   setTeachers: React.Dispatch<React.SetStateAction<Teacher[]>>;
@@ -54,10 +52,19 @@ export const TeacherProvider = ({ children }: { children: ReactNode }) => {
       },
       qualifications: [
         { name: "Bachelor of Education", institute: "University of Toronto" },
-        { name: "Master of Science in Mathematics", institute: "McGill University" },
-        { name: "Ontario Teaching Certificate", institute: "Ontario College of Teachers" },
+        {
+          name: "Master of Science in Mathematics",
+          institute: "McGill University",
+        },
+        {
+          name: "Ontario Teaching Certificate",
+          institute: "Ontario College of Teachers",
+        },
         { name: "Specialist in English", institute: "York University" },
-        { name: "Certified Science Teacher", institute: "University of Waterloo" },
+        {
+          name: "Certified Science Teacher",
+          institute: "University of Waterloo",
+        },
       ],
       detailedSchedule: [
         {
