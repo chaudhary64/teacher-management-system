@@ -266,7 +266,7 @@ const Page = () => {
                       Personal Information
                     </h2>
                     <p className="text-gray-600 mt-1">
-                      Enter the teacher's basic details
+                      Enter the teacher&#39;s basic details
                     </p>
                   </div>
 
@@ -373,7 +373,7 @@ const Page = () => {
                       Qualifications
                     </h2>
                     <p className="text-gray-600 mt-1">
-                      Add teacher's qualifications and hourly rates
+                      Add teacher&#39;s qualifications and hourly rates
                     </p>
                   </div>
 
@@ -404,7 +404,7 @@ const Page = () => {
                             </label>
                             <input
                               type="text"
-                              placeholder="e.g., Master's in Mathematics"
+                              placeholder="e.g., Master&#39;s in Mathematics"
                               value={q.name}
                               onChange={(e) =>
                                 handleQualificationChange(
@@ -462,7 +462,7 @@ const Page = () => {
                       Teaching Schedule
                     </h2>
                     <p className="text-gray-600 mt-1">
-                      Set up the teacher's class schedule
+                      Set up the teacher&#39;s class schedule
                     </p>
                   </div>
 

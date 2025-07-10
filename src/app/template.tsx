@@ -23,7 +23,7 @@ interface SidebarItem {
   badge?: number;
 }
 
-const TeacherManagementInterface: React.FC<React.PropsWithChildren<{}>> = ({
+const TeacherManagementInterface: React.FC<React.PropsWithChildren<object>> = ({
   children,
 }) => {
   const { teachers } = useTeacherContext();

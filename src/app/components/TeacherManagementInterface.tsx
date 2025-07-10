@@ -1,5 +1,7 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useTeacherContext } from "@/context/TeacherContext";
 // import { useTeacherContext } from "@/context/TeacherContext";
 import {
   User,
@@ -367,18 +369,12 @@ const TeacherManagementInterface: React.FC<TeacherManagementInterfaceProps> = ({
     );
   };
 
-  const router = require("next/navigation").useRouter
-    ? require("next/navigation").useRouter()
-    : null;
-  // const { deleteTeacher } = useTeacherContext();
-  // import { useTeacherContext } from "@/context/TeacherContext";
-  // const { deleteTeacher } = useTeacherContext();
-  // Use the hook only once at the top
-  const { deleteTeacher } =
-    require("@/context/TeacherContext").useTeacherContext();
+  // Use the hooks only once at the top
+  const router = useRouter();
+  const { deleteTeacher } = useTeacherContext();
   const handleDelete = () => {
     deleteTeacher(teacher.id);
-    if (router) router.push("/teachers");
+    router.push("/teachers");
   };
   return (
     <div className="min-h-screen bg-gray-50">
