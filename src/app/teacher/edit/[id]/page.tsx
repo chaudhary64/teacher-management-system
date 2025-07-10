@@ -316,7 +316,7 @@ const EditTeacherPage = () => {
                       Personal Information
                     </h2>
                     <p className="text-gray-600 mt-1">
-                      Edit the teacher's basic details
+                      Edit the teacher&apos;s basic details
                     </p>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -422,7 +422,7 @@ const EditTeacherPage = () => {
                       Qualifications
                     </h2>
                     <p className="text-gray-600 mt-1">
-                      Edit teacher's qualifications and hourly rates
+                      Edit teacher&apos;s qualifications and hourly rates
                     </p>
                   </div>
                   <div className="space-y-4">
@@ -514,7 +514,7 @@ const EditTeacherPage = () => {
                       Teaching Schedule
                     </h2>
                     <p className="text-gray-600 mt-1">
-                      Edit the teacher's class schedule
+                      Edit the teacher&apos;s class schedule
                     </p>
                   </div>
                   <div className="space-y-4">

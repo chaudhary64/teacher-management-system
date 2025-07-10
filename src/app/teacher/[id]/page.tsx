@@ -6,7 +6,7 @@ import TeacherManagementInterface from "../../components/TeacherManagementInterf
 
 type Teacher = {
   id: string;
-  [key: string]: any;
+  [key: string]: unknown;
 };
 
 const TeacherPage = () => {
