@@ -234,6 +234,13 @@ const TeacherManagementInterface: React.FC<TeacherManagementInterfaceProps> = ({
                       ? "bg-green-50 border-green-200 text-green-800"
                       : "border-gray-200 text-gray-700 hover:border-gray-300"
                   }`}
+                  aria-label={`View schedule for ${formatDate(
+                    getDateString(
+                      currentDate.getFullYear(),
+                      currentDate.getMonth(),
+                      day
+                    )
+                  )}`}
                 >
                   <div className="flex flex-col items-center">
                     <span>{day}</span>
@@ -277,6 +284,7 @@ const TeacherManagementInterface: React.FC<TeacherManagementInterfaceProps> = ({
       <div
         className="fixed inset-0 bg-black/25 backdrop-blur z-50 flex items-center justify-center p-4 cursor-pointer"
         onClick={closeModal}
+        aria-label="Close schedule modal"
       >
         <div
           className="bg-white rounded-xl shadow-xl max-w-md w-full max-h-[80vh] overflow-y-auto cursor-default"
@@ -460,12 +468,14 @@ const TeacherManagementInterface: React.FC<TeacherManagementInterfaceProps> = ({
                           if (router)
                             router.push(`/teacher/edit/${teacher.id}`);
                         }}
+                        aria-label="Edit teacher"
                       >
                         Edit
                       </button>
                       <button
                         className="px-5 py-2 bg-red-500 text-white rounded-lg font-semibold hover:bg-red-600 transition shadow"
                         onClick={handleDelete}
+                        aria-label="Remove teacher"
                       >
                         Remove
                       </button>
@@ -487,6 +497,11 @@ const TeacherManagementInterface: React.FC<TeacherManagementInterfaceProps> = ({
                   <button
                     onClick={() => toggleSection("qualifications")}
                     className="p-1.5 sm:p-2 hover:bg-gray-100 rounded-lg cursor-pointer"
+                    aria-label={
+                      expandedSections.qualifications
+                        ? "Collapse qualifications section"
+                        : "Expand qualifications section"
+                    }
                   >
                     {expandedSections.qualifications ? (
                       <ChevronDown size={16} className="sm:w-5 sm:h-5" />

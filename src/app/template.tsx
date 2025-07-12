@@ -94,6 +94,7 @@ const TeacherManagementInterface: React.FC<React.PropsWithChildren<object>> = ({
     <Link href={`/${id}`}>
       <button
         onClick={onClick}
+        aria-label={label}
         className={`w-full flex items-center justify-between p-2.5 rounded-lg transition-all duration-200 group text-left cursor-pointer ${
           isActive
             ? "bg-blue-600 text-white shadow-md"
@@ -132,6 +133,9 @@ const TeacherManagementInterface: React.FC<React.PropsWithChildren<object>> = ({
         <div
           className="fixed inset-0 bg-black/25 backdrop-blur z-40 cursor-pointer"
           onClick={toggleSidebar}
+          aria-label="Close sidebar overlay"
+          role="button"
+          tabIndex={0}
         />
       )}
 
@@ -141,6 +145,7 @@ const TeacherManagementInterface: React.FC<React.PropsWithChildren<object>> = ({
         className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-xl transform transition-transform duration-300 ease-in-out ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
+        aria-label="Sidebar navigation"
       >
         <div className="flex flex-col h-full">
           {/* Sidebar Header */}
@@ -160,6 +165,7 @@ const TeacherManagementInterface: React.FC<React.PropsWithChildren<object>> = ({
             </div>
             <button
               onClick={toggleSidebar}
+              aria-label="Close sidebar"
               className="p-1.5 hover:bg-gray-100 rounded-lg flex-shrink-0 cursor-pointer"
             >
               <X size={18} className="text-gray-500" />
@@ -197,10 +203,10 @@ const TeacherManagementInterface: React.FC<React.PropsWithChildren<object>> = ({
               </div>
             </div>
             <div className="flex space-x-1">
-              <button className="flex-1 p-1.5 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+              <button aria-label="Settings" className="flex-1 p-1.5 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
                 <Settings size={16} className="mx-auto" />
               </button>
-              <button className="flex-1 p-1.5 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+              <button aria-label="Log out" className="flex-1 p-1.5 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
                 <LogOut size={16} className="mx-auto" />
               </button>
             </div>
@@ -218,6 +224,7 @@ const TeacherManagementInterface: React.FC<React.PropsWithChildren<object>> = ({
                 <button
                   id="menu-button"
                   onClick={toggleSidebar}
+                  aria-label="Open sidebar menu"
                   className="p-2 hover:bg-gray-100 rounded-lg flex-shrink-0 cursor-pointer"
                 >
                   <Menu size={18} className="text-gray-600" />
@@ -232,7 +239,7 @@ const TeacherManagementInterface: React.FC<React.PropsWithChildren<object>> = ({
                 </div>
               </div>
               <div className="flex items-center space-x-1 sm:space-x-2">
-                <button className="p-2 hover:bg-gray-100 rounded-lg relative flex-shrink-0">
+                <button aria-label="Notifications" className="p-2 hover:bg-gray-100 rounded-lg relative flex-shrink-0">
                   <Bell size={18} className="text-gray-600" />
                   <span className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 bg-red-500 rounded-full flex items-center justify-center">
                     <span className="text-white text-xs font-bold">3</span>

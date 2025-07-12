@@ -494,8 +494,12 @@ const EditTeacherPage = () => {
                               type="button"
                               onClick={() => removeQualification(i)}
                               className="text-red-500 hover:text-red-700 transition-colors duration-200"
+                              aria-label={`Remove Qualification ${i + 1}`}
                             >
-                              <XMarkIcon className="w-5 h-5" />
+                              <XMarkIcon
+                                className="w-5 h-5"
+                                aria-hidden="true"
+                              />
                             </button>
                           )}
                         </div>
@@ -551,8 +555,9 @@ const EditTeacherPage = () => {
                       type="button"
                       onClick={addQualification}
                       className="w-full py-3 border-2 border-dashed border-indigo-300 rounded-xl text-indigo-600 hover:border-indigo-400 hover:text-indigo-700 transition-all duration-200 flex items-center justify-center"
+                      aria-label="Add Another Qualification"
                     >
-                      <PlusIcon className="w-5 h-5 mr-2" />
+                      <PlusIcon className="w-5 h-5 mr-2" aria-hidden="true" />
                       Add Another Qualification
                     </button>
                   </div>
@@ -585,8 +590,12 @@ const EditTeacherPage = () => {
                               type="button"
                               onClick={() => removeSchedule(i)}
                               className="text-red-500 hover:text-red-700 transition-colors duration-200"
+                              aria-label={`Remove Schedule ${i + 1}`}
                             >
-                              <XMarkIcon className="w-5 h-5" />
+                              <XMarkIcon
+                                className="w-5 h-5"
+                                aria-hidden="true"
+                              />
                             </button>
                           )}
                         </div>
@@ -711,8 +720,9 @@ const EditTeacherPage = () => {
                       type="button"
                       onClick={addSchedule}
                       className="w-full py-3 border-2 border-dashed border-indigo-300 rounded-xl text-indigo-600 hover:border-indigo-400 hover:text-indigo-700 transition-all duration-200 flex items-center justify-center"
+                      aria-label="Add Another Schedule"
                     >
-                      <PlusIcon className="w-5 h-5 mr-2" />
+                      <PlusIcon className="w-5 h-5 mr-2" aria-hidden="true" />
                       Add Another Schedule
                     </button>
                   </div>
@@ -730,6 +740,7 @@ const EditTeacherPage = () => {
                       ? "bg-gray-200 text-gray-400 cursor-not-allowed"
                       : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50"
                   }`}
+                  aria-label="Previous Step"
                 >
                   Previous
                 </button>
@@ -738,6 +749,7 @@ const EditTeacherPage = () => {
                     type="button"
                     onClick={nextStep}
                     className="w-full sm:w-auto px-3 sm:px-5 py-2 sm:py-2.5 bg-indigo-600 text-white rounded-lg sm:rounded-xl font-medium text-sm hover:bg-indigo-700 transition-all duration-200"
+                    aria-label="Next Step"
                   >
                     Next Step
                   </button>
@@ -753,8 +765,9 @@ const EditTeacherPage = () => {
                       )
                     }
                     className="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-2.5 bg-green-600 text-white rounded-lg sm:rounded-xl font-medium text-sm hover:bg-green-700 transition-all duration-200 flex items-center justify-center"
+                    aria-label="Save Changes"
                   >
-                    <UserPlusIcon className="w-5 h-5 mr-2" />
+                    <UserPlusIcon className="w-5 h-5 mr-2" aria-hidden="true" />
                     Save Changes
                   </button>
                 )}
