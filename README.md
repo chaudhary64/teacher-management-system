@@ -7,7 +7,7 @@ A modern web application for managing teacher information, schedules, and commun
 ## Live Demo & Video
 
 - **Live Demo:** [https://teacher-management-system-drab.vercel.app/](https://teacher-management-system-drab.vercel.app/)
-- **Loom Video:** [Watch Video](https://www.loom.com/share/your-video-link)
+- **Loom Video:** [Watch Video](https://drive.google.com/file/d/114j0CV0LZr-6KCjrnTdS7Ud0zHBAf02J/view?usp=drive_link)
 
 ## Setup and Installation
 
