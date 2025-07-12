@@ -119,9 +119,7 @@ const EditTeacherPage = () => {
     value: string
   ) => {
     const updated = form.qualifications.map((q, i) =>
-      i === index
-        ? { ...q, [field]: value }
-        : q
+      i === index ? { ...q, [field]: value } : q
     );
     setForm({ ...form, qualifications: updated });
   };
@@ -239,18 +237,75 @@ const EditTeacherPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 p-4">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 p-2 sm:p-4">
+      <div className="max-w-full sm:max-w-4xl mx-auto">
+        <div className="text-center mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-4xl font-bold text-gray-900 mb-2">
             Edit Teacher
           </h1>
-          <p className="text-gray-600">
+          <p className="text-gray-600 text-sm sm:text-base">
             Update the information for this teacher
           </p>
         </div>
-        <div className="mb-8">
-          <div className="flex justify-center items-center space-x-4">
+        <div className="mb-6 sm:mb-8">
+          {/* Mobile Steps: vertical, always visible, improved UI */}
+          <div className="sm:hidden flex flex-col items-center">
+            <div className="bg-white rounded-xl shadow border border-gray-200 px-4 py-3 w-full max-w-xs flex flex-col items-center relative">
+              {/* Vertical progress bar */}
+              <div
+                className="absolute left-6 top-6 bottom-6 w-1 bg-gray-200 z-0 rounded-full"
+                style={{
+                  height: steps.length > 1 ? "calc(100% - 2.5rem)" : "0",
+                }}
+              />
+              {steps.map((step, index) => (
+                <div
+                  key={step.number}
+                  className="flex items-center w-full relative z-10 mb-2 last:mb-0"
+                >
+                  <div className="flex flex-col items-center mr-3">
+                    <div
+                      className={`flex items-center justify-center w-9 h-9 rounded-full border-2 transition-all duration-300 ${
+                        currentStep >= step.number
+                          ? "bg-indigo-600 border-indigo-600 text-white"
+                          : "bg-white border-gray-300 text-gray-400"
+                      }`}
+                    >
+                      <step.icon className="w-5 h-5" />
+                    </div>
+                    {index < steps.length - 1 && (
+                      <div
+                        className="flex-1 w-0.5 bg-gray-200"
+                        style={{ height: "1.5rem" }}
+                      />
+                    )}
+                  </div>
+                  <div className="flex flex-col">
+                    <span
+                      className={`text-xs font-semibold ${
+                        currentStep >= step.number
+                          ? "text-indigo-600"
+                          : "text-gray-400"
+                      }`}
+                    >
+                      Step {step.number}
+                    </span>
+                    <span
+                      className={`text-xs ${
+                        currentStep >= step.number
+                          ? "text-gray-900"
+                          : "text-gray-400"
+                      }`}
+                    >
+                      {step.title}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          {/* Desktop Steps: horizontal */}
+          <div className="hidden sm:flex justify-center items-center space-x-4">
             {steps.map((step, index) => (
               <div key={step.number} className="flex items-center">
                 <div
@@ -262,7 +317,7 @@ const EditTeacherPage = () => {
                 >
                   <step.icon className="w-6 h-6" />
                 </div>
-                <div className="ml-3 hidden sm:block">
+                <div className="ml-3">
                   <p
                     className={`text-sm font-medium ${
                       currentStep >= step.number
@@ -664,13 +719,13 @@ const EditTeacherPage = () => {
                 </div>
               )}
             </div>
-            <div className="bg-gray-50 px-8 py-6 border-t border-gray-200">
-              <div className="flex justify-between items-center">
+            <div className="bg-gray-50 px-3 py-3 sm:px-6 sm:py-4 border-t border-gray-200">
+              <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-2 sm:gap-0">
                 <button
                   type="button"
                   onClick={prevStep}
                   disabled={currentStep === 1}
-                  className={`px-6 py-3 rounded-xl font-medium transition-all duration-200 ${
+                  className={`w-full sm:w-auto px-3 sm:px-5 py-2 sm:py-2.5 rounded-lg sm:rounded-xl font-medium text-sm transition-all duration-200 ${
                     currentStep === 1
                       ? "bg-gray-200 text-gray-400 cursor-not-allowed"
                       : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50"
@@ -682,7 +737,7 @@ const EditTeacherPage = () => {
                   <button
                     type="button"
                     onClick={nextStep}
-                    className="px-6 py-3 bg-indigo-600 text-white rounded-xl font-medium hover:bg-indigo-700 transition-all duration-200"
+                    className="w-full sm:w-auto px-3 sm:px-5 py-2 sm:py-2.5 bg-indigo-600 text-white rounded-lg sm:rounded-xl font-medium text-sm hover:bg-indigo-700 transition-all duration-200"
                   >
                     Next Step
                   </button>
@@ -697,7 +752,7 @@ const EditTeacherPage = () => {
                         }) as unknown as React.FormEvent<HTMLFormElement>
                       )
                     }
-                    className="px-8 py-3 bg-green-600 text-white rounded-xl font-medium hover:bg-green-700 transition-all duration-200 flex items-center"
+                    className="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-2.5 bg-green-600 text-white rounded-lg sm:rounded-xl font-medium text-sm hover:bg-green-700 transition-all duration-200 flex items-center justify-center"
                   >
                     <UserPlusIcon className="w-5 h-5 mr-2" />
                     Save Changes

@@ -193,21 +193,78 @@ const Page = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 p-4">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 p-2 sm:p-4">
+      <div className="max-w-full sm:max-w-4xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">
+        <div className="text-center mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-4xl font-bold text-gray-900 mb-2">
             Add New Teacher
           </h1>
-          <p className="text-gray-600">
+          <p className="text-gray-600 text-sm sm:text-base">
             Complete the form to register a new teacher
           </p>
         </div>
 
         {/* Progress Steps */}
-        <div className="mb-8">
-          <div className="flex justify-center items-center space-x-4">
+        <div className="mb-6 sm:mb-8">
+          {/* Mobile Steps: vertical, always visible, improved UI */}
+          <div className="sm:hidden flex flex-col items-center">
+            <div className="bg-white rounded-xl shadow border border-gray-200 px-4 py-3 w-full max-w-xs flex flex-col items-center relative">
+              {/* Vertical progress bar */}
+              <div
+                className="absolute left-6 top-6 bottom-6 w-1 bg-gray-200 z-0 rounded-full"
+                style={{
+                  height: steps.length > 1 ? "calc(100% - 2.5rem)" : "0",
+                }}
+              />
+              {steps.map((step, index) => (
+                <div
+                  key={step.number}
+                  className="flex items-center w-full relative z-10 mb-2 last:mb-0"
+                >
+                  <div className="flex flex-col items-center mr-3">
+                    <div
+                      className={`flex items-center justify-center w-9 h-9 rounded-full border-2 transition-all duration-300 ${
+                        currentStep >= step.number
+                          ? "bg-indigo-600 border-indigo-600 text-white"
+                          : "bg-white border-gray-300 text-gray-400"
+                      }`}
+                    >
+                      <step.icon className="w-5 h-5" />
+                    </div>
+                    {index < steps.length - 1 && (
+                      <div
+                        className="flex-1 w-0.5 bg-gray-200"
+                        style={{ height: "1.5rem" }}
+                      />
+                    )}
+                  </div>
+                  <div className="flex flex-col">
+                    <span
+                      className={`text-xs font-semibold ${
+                        currentStep >= step.number
+                          ? "text-indigo-600"
+                          : "text-gray-400"
+                      }`}
+                    >
+                      Step {step.number}
+                    </span>
+                    <span
+                      className={`text-xs ${
+                        currentStep >= step.number
+                          ? "text-gray-900"
+                          : "text-gray-400"
+                      }`}
+                    >
+                      {step.title}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          {/* Desktop Steps: horizontal */}
+          <div className="hidden sm:flex justify-center items-center space-x-4">
             {steps.map((step, index) => (
               <div key={step.number} className="flex items-center">
                 <div
@@ -219,7 +276,7 @@ const Page = () => {
                 >
                   <step.icon className="w-6 h-6" />
                 </div>
-                <div className="ml-3 hidden sm:block">
+                <div className="ml-3">
                   <p
                     className={`text-sm font-medium ${
                       currentStep >= step.number
@@ -254,9 +311,9 @@ const Page = () => {
         </div>
 
         {/* Form Card */}
-        <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+        <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
           <form onSubmit={handleSubmit}>
-            <div className="p-8">
+            <div className="p-4 sm:p-8">
               {/* Step 1: Personal Information */}
               {currentStep === 1 && (
                 <div className="space-y-6">
@@ -270,7 +327,7 @@ const Page = () => {
                     </p>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2">
                     <div className="md:col-span-2">
                       <label className="block text-sm font-medium text-gray-700 mb-2">
                         Full Name
@@ -280,7 +337,7 @@ const Page = () => {
                         name="name"
                         value={form.name}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+                        className="w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 text-sm sm:text-base"
                         placeholder="Enter full name"
                         required
                       />
@@ -295,7 +352,7 @@ const Page = () => {
                         name="email"
                         value={form.email}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+                        className="w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 text-sm sm:text-base"
                         placeholder="teacher@example.com"
                         required
                       />
@@ -310,7 +367,7 @@ const Page = () => {
                         name="phone"
                         value={form.phone}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+                        className="w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 text-sm sm:text-base"
                         placeholder="+1 (555) 123-4567"
                         required
                       />
@@ -325,7 +382,7 @@ const Page = () => {
                         name="street"
                         value={form.street}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+                        className="w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 text-sm sm:text-base"
                         placeholder="123 Main Street"
                         required
                       />
@@ -340,7 +397,7 @@ const Page = () => {
                         name="city"
                         value={form.city}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+                        className="w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 text-sm sm:text-base"
                         placeholder="New York"
                         required
                       />
@@ -355,7 +412,7 @@ const Page = () => {
                         name="country"
                         value={form.country}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+                        className="w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 text-sm sm:text-base"
                         placeholder="United States"
                         required
                       />
@@ -377,13 +434,13 @@ const Page = () => {
                     </p>
                   </div>
 
-                  <div className="space-y-4">
+                  <div className="space-y-3 sm:space-y-4">
                     {form.qualifications.map((q, i) => (
                       <div
                         key={i}
-                        className="bg-gray-50 rounded-xl p-4 border border-gray-200"
+                        className="bg-gray-50 rounded-lg sm:rounded-xl p-3 sm:p-4 border border-gray-200"
                       >
-                        <div className="flex items-center justify-between mb-3">
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-2 sm:mb-3 gap-2 sm:gap-0">
                           <h3 className="text-lg font-medium text-gray-900">
                             Qualification {i + 1}
                           </h3>
@@ -397,7 +454,7 @@ const Page = () => {
                             </button>
                           )}
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-3">
                           <div className="md:col-span-2">
                             <label className="block text-sm font-medium text-gray-700 mb-2">
                               Qualification Name
@@ -413,7 +470,7 @@ const Page = () => {
                                   e.target.value
                                 )
                               }
-                              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+                              className="w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 text-sm sm:text-base"
                               required
                             />
                           </div>
@@ -432,7 +489,7 @@ const Page = () => {
                                   e.target.value
                                 )
                               }
-                              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+                              className="w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 text-sm sm:text-base"
                               required
                             />
                           </div>
@@ -443,7 +500,7 @@ const Page = () => {
                     <button
                       type="button"
                       onClick={addQualification}
-                      className="w-full py-3 border-2 border-dashed border-indigo-300 rounded-xl text-indigo-600 hover:border-indigo-400 hover:text-indigo-700 transition-all duration-200 flex items-center justify-center"
+                      className="w-full py-2 sm:py-3 border-2 border-dashed border-indigo-300 rounded-lg sm:rounded-xl text-indigo-600 hover:border-indigo-400 hover:text-indigo-700 transition-all duration-200 flex items-center justify-center text-sm sm:text-base"
                     >
                       <PlusIcon className="w-5 h-5 mr-2" />
                       Add Another Qualification
@@ -465,13 +522,13 @@ const Page = () => {
                     </p>
                   </div>
 
-                  <div className="space-y-4">
+                  <div className="space-y-3 sm:space-y-4">
                     {form.detailedSchedule.map((s, i) => (
                       <div
                         key={i}
-                        className="bg-gray-50 rounded-xl p-4 border border-gray-200"
+                        className="bg-gray-50 rounded-lg sm:rounded-xl p-3 sm:p-4 border border-gray-200"
                       >
-                        <div className="flex items-center justify-between mb-3">
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-2 sm:mb-3 gap-2 sm:gap-0">
                           <h3 className="text-lg font-medium text-gray-900">
                             Schedule {i + 1}
                           </h3>
@@ -485,7 +542,7 @@ const Page = () => {
                             </button>
                           )}
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-3">
                           <div>
                             <label className="block text-sm font-medium text-gray-700 mb-2">
                               Date
@@ -496,7 +553,7 @@ const Page = () => {
                               onChange={(e) =>
                                 handleScheduleChange(i, "date", e.target.value)
                               }
-                              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+                              className="w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 text-sm sm:text-base"
                               required
                             />
                           </div>
@@ -510,7 +567,7 @@ const Page = () => {
                               type="text"
                               value={s.dayOfWeek}
                               readOnly
-                              className="w-full px-4 py-3 border border-gray-300 rounded-xl bg-gray-100 text-gray-600 cursor-not-allowed"
+                              className="w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl bg-gray-100 text-gray-600 cursor-not-allowed text-sm sm:text-base"
                               placeholder="Select date first"
                             />
                           </div>
@@ -530,7 +587,7 @@ const Page = () => {
                                   e.target.value
                                 )
                               }
-                              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+                              className="w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 text-sm sm:text-base"
                               required
                             />
                           </div>
@@ -549,7 +606,7 @@ const Page = () => {
                                   e.target.value
                                 )
                               }
-                              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+                              className="w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 text-sm sm:text-base"
                               required
                             />
                           </div>
@@ -568,7 +625,7 @@ const Page = () => {
                                   e.target.value
                                 )
                               }
-                              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+                              className="w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 text-sm sm:text-base"
                               required
                             />
                           </div>
@@ -588,7 +645,7 @@ const Page = () => {
                                   e.target.value
                                 )
                               }
-                              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+                              className="w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 text-sm sm:text-base"
                               required
                             />
                           </div>
@@ -599,7 +656,7 @@ const Page = () => {
                     <button
                       type="button"
                       onClick={addSchedule}
-                      className="w-full py-3 border-2 border-dashed border-indigo-300 rounded-xl text-indigo-600 hover:border-indigo-400 hover:text-indigo-700 transition-all duration-200 flex items-center justify-center"
+                      className="w-full py-2 sm:py-3 border-2 border-dashed border-indigo-300 rounded-lg sm:rounded-xl text-indigo-600 hover:border-indigo-400 hover:text-indigo-700 transition-all duration-200 flex items-center justify-center text-sm sm:text-base"
                     >
                       <PlusIcon className="w-5 h-5 mr-2" />
                       Add Another Schedule
@@ -610,13 +667,13 @@ const Page = () => {
             </div>
 
             {/* Navigation Footer */}
-            <div className="bg-gray-50 px-8 py-6 border-t border-gray-200">
-              <div className="flex justify-between items-center">
+            <div className="bg-gray-50 px-3 py-4 sm:px-8 sm:py-6 border-t border-gray-200">
+              <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3 sm:gap-0">
                 <button
                   type="button"
                   onClick={prevStep}
                   disabled={currentStep === 1}
-                  className={`px-6 py-3 rounded-xl font-medium transition-all duration-200 ${
+                  className={`w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-3 rounded-lg sm:rounded-xl font-medium transition-all duration-200 ${
                     currentStep === 1
                       ? "bg-gray-200 text-gray-400 cursor-not-allowed"
                       : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50"
@@ -629,14 +686,14 @@ const Page = () => {
                   <button
                     type="button"
                     onClick={nextStep}
-                    className="px-6 py-3 bg-indigo-600 text-white rounded-xl font-medium hover:bg-indigo-700 transition-all duration-200"
+                    className="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-3 bg-indigo-600 text-white rounded-lg sm:rounded-xl font-medium hover:bg-indigo-700 transition-all duration-200"
                   >
                     Next Step
                   </button>
                 ) : (
                   <button
                     type="submit"
-                    className="px-8 py-3 bg-green-600 text-white rounded-xl font-medium hover:bg-green-700 transition-all duration-200 flex items-center"
+                    className="w-full sm:w-auto px-6 sm:px-8 py-2 sm:py-3 bg-green-600 text-white rounded-lg sm:rounded-xl font-medium hover:bg-green-700 transition-all duration-200 flex items-center justify-center"
                   >
                     <UserPlusIcon className="w-5 h-5 mr-2" />
                     Add Teacher
@@ -647,7 +704,6 @@ const Page = () => {
           </form>
         </div>
 
-        {/* Success Message */}
         {/* Success Toast Popup */}
         {success && (
           <div className="fixed bottom-6 right-6 z-50 animate-fade-in-up">

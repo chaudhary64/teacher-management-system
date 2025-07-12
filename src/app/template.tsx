@@ -130,7 +130,7 @@ const TeacherManagementInterface: React.FC<React.PropsWithChildren<object>> = ({
       {/* Mobile Sidebar Overlay */}
       {isSidebarOpen && isMobile && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 cursor-pointer"
+          className="fixed inset-0 bg-black/25 backdrop-blur z-40 cursor-pointer"
           onClick={toggleSidebar}
         />
       )}

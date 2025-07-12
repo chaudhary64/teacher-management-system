@@ -172,7 +172,7 @@ const TeacherManagementInterface: React.FC<TeacherManagementInterfaceProps> = ({
     return (
       <div className="bg-white rounded-xl shadow-sm border border-gray-200">
         <div className="p-3 sm:p-4 lg:p-6">
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex flex-col xs:flex-row xs:items-center xs:justify-between gap-2 mb-4">
             <h3 className="text-base sm:text-lg font-semibold text-gray-900 flex items-center">
               <Calendar
                 size={16}
@@ -180,19 +180,21 @@ const TeacherManagementInterface: React.FC<TeacherManagementInterfaceProps> = ({
               />
               Schedule Calendar
             </h3>
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center justify-between w-full xs:w-auto gap-1 sm:gap-2">
               <button
                 onClick={() => navigateMonth(-1)}
-                className="p-2 hover:bg-gray-100 rounded-lg cursor-pointer"
+                className="p-2 hover:bg-gray-100 rounded-lg cursor-pointer flex-shrink-0"
+                aria-label="Previous Month"
               >
                 <ChevronLeft size={16} />
               </button>
-              <span className="text-sm font-medium min-w-[120px] text-center">
+              <span className="text-sm font-medium min-w-0 flex-1 text-center truncate">
                 {formatCalendarDate(currentDate)}
               </span>
               <button
                 onClick={() => navigateMonth(1)}
-                className="p-2 hover:bg-gray-100 rounded-lg cursor-pointer"
+                className="p-2 hover:bg-gray-100 rounded-lg cursor-pointer flex-shrink-0"
+                aria-label="Next Month"
               >
                 <ChevronRight size={16} />
               </button>
@@ -374,92 +376,101 @@ const TeacherManagementInterface: React.FC<TeacherManagementInterfaceProps> = ({
     router.push("/teachers");
   };
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       <ScheduleModal />
       <div className="flex flex-col min-h-screen">
         <main className="flex-1 p-3 sm:p-4 lg:p-6">
           <div className="space-y-4 sm:space-y-6">
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-3 sm:p-4 lg:p-6">
-              <div className="flex flex-col space-y-4 sm:space-y-0 sm:flex-row sm:items-start sm:space-x-4 lg:space-x-6">
-                <div className="flex-shrink-0 text-center sm:text-left">
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center mx-auto sm:mx-0">
-                    <User
-                      size={20}
-                      className="text-white sm:w-6 sm:h-6 lg:w-8 lg:h-8"
-                    />
+            <div className="rounded-2xl shadow-md p-6 sm:p-8 lg:p-10">
+              <div className="flex flex-col md:flex-row md:items-center gap-8 md:gap-10">
+                {/* Avatar */}
+                <div className="flex-shrink-0 flex flex-col items-center md:items-start">
+                  <div className="w-28 h-28 md:w-32 md:h-32 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center shadow-lg border-4 border-white">
+                    <User size={48} className="text-white" />
                   </div>
                 </div>
-                <div className="flex-1 text-center sm:text-left min-w-0">
-                  <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-1 truncate">
-                    {teacher.name}
-                  </h2>
-                  <p className="text-gray-600 mb-2 text-sm sm:text-base">
-                    {Array.from(
-                      new Set(teacher.detailedSchedule.map((s) => s.subject))
-                    ).join(", ")}
-                  </p>
-                  <div className="flex items-center justify-center sm:justify-start space-x-1 mb-3">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        size={14}
-                        className="text-yellow-400 fill-current"
-                      />
-                    ))}
-                    <span className="text-xs sm:text-sm text-gray-600 ml-2">
-                      5.0 (24 reviews)
-                    </span>
-                  </div>
-                  <div className="space-y-2 sm:space-y-1 text-xs sm:text-sm">
-                    <div className="flex items-center justify-center sm:justify-start space-x-2 text-gray-600">
-                      <Mail size={12} className="text-gray-400 flex-shrink-0" />
-                      <span className="truncate">{teacher.email}</span>
+                {/* Info and Stats */}
+                <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Main Info */}
+                  <div className="flex flex-col justify-center">
+                    <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-1 truncate">
+                      {teacher.name}
+                    </h2>
+                    <p className="text-gray-600 mb-2 text-base lg:text-lg font-medium">
+                      {Array.from(
+                        new Set(teacher.detailedSchedule.map((s) => s.subject))
+                      ).join(", ")}
+                    </p>
+                    <div className="flex items-center space-x-1 mb-3">
+                      {[...Array(5)].map((_, i) => (
+                        <Star
+                          key={i}
+                          size={18}
+                          className="text-yellow-400 fill-current"
+                        />
+                      ))}
+                      <span className="text-sm text-gray-600 ml-2">
+                        5.0 (24 reviews)
+                      </span>
                     </div>
-                    <div className="flex items-center justify-center sm:justify-start space-x-2 text-gray-600">
-                      <Phone
-                        size={12}
-                        className="text-gray-400 flex-shrink-0"
-                      />
-                      <span className="truncate">{teacher.phone}</span>
-                    </div>
-                    <div className="flex items-center justify-center sm:justify-start space-x-2 text-gray-600">
-                      <MapPin
-                        size={12}
-                        className="text-gray-400 flex-shrink-0"
-                      />
-                      <span className="truncate">{teacher.address.city}</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex-shrink-0 flex flex-col items-end gap-2">
-                  <div className="grid grid-cols-2 gap-3 text-center">
-                    <div className="p-2.5 sm:p-3 bg-blue-50 rounded-lg">
-                      <div className="text-lg sm:text-xl font-bold text-blue-600">
-                        24
+                    <div className="space-y-2 text-sm">
+                      <div className="flex items-center space-x-2 text-gray-600">
+                        <Mail
+                          size={14}
+                          className="text-gray-400 flex-shrink-0"
+                        />
+                        <span className="truncate">{teacher.email}</span>
                       </div>
-                      <div className="text-xs text-gray-600">Students</div>
-                    </div>
-                    <div className="p-2.5 sm:p-3 bg-green-50 rounded-lg">
-                      <div className="text-lg sm:text-xl font-bold text-green-600">
-                        {teacher.detailedSchedule.length}
+                      <div className="flex items-center space-x-2 text-gray-600">
+                        <Phone
+                          size={14}
+                          className="text-gray-400 flex-shrink-0"
+                        />
+                        <span className="truncate">{teacher.phone}</span>
                       </div>
-                      <div className="text-xs text-gray-600">Classes</div>
+                      <div className="flex items-center space-x-2 text-gray-600">
+                        <MapPin
+                          size={14}
+                          className="text-gray-400 flex-shrink-0"
+                        />
+                        <span className="truncate">{teacher.address.city}</span>
+                      </div>
                     </div>
                   </div>
-                  <button
-                    className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition cursor-pointer"
-                    onClick={() => {
-                      if (router) router.push(`/teacher/edit/${teacher.id}`);
-                    }}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    className="mt-2 px-4 py-2 bg-red-500 text-white rounded-lg font-semibold hover:bg-red-600 transition cursor-pointer"
-                    onClick={handleDelete}
-                  >
-                    Remove
-                  </button>
+                  {/* Stats and Actions */}
+                  <div className="flex flex-col justify-between items-center md:items-end gap-4 h-full">
+                    <div className="flex flex-row md:flex-col gap-4 w-full md:w-auto">
+                      <div className="flex-1 p-4 bg-blue-100 rounded-xl text-center shadow-sm border border-blue-200">
+                        <div className="text-2xl font-bold text-blue-700">
+                          24
+                        </div>
+                        <div className="text-xs text-gray-600">Students</div>
+                      </div>
+                      <div className="flex-1 p-4 bg-green-100 rounded-xl text-center shadow-sm border border-green-200">
+                        <div className="text-2xl font-bold text-green-700">
+                          {teacher.detailedSchedule.length}
+                        </div>
+                        <div className="text-xs text-gray-600">Classes</div>
+                      </div>
+                    </div>
+                    <div className="flex flex-row gap-3 mt-4 md:mt-6">
+                      <button
+                        className="px-5 py-2 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition shadow"
+                        onClick={() => {
+                          if (router)
+                            router.push(`/teacher/edit/${teacher.id}`);
+                        }}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="px-5 py-2 bg-red-500 text-white rounded-lg font-semibold hover:bg-red-600 transition shadow"
+                        onClick={handleDelete}
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -485,16 +496,16 @@ const TeacherManagementInterface: React.FC<TeacherManagementInterfaceProps> = ({
                   </button>
                 </div>
                 {expandedSections.qualifications && (
-                  <div className="grid grid-cols-1 gap-2 sm:gap-3">
+                  <div className="flex flex-col gap-3">
                     {teacher.qualifications.map((qual, index) => (
                       <div
                         key={index}
-                        className="flex items-center justify-between p-2.5 sm:p-3 bg-gray-50 rounded-lg"
+                        className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-4 p-3 bg-gray-50 rounded-lg border border-gray-100 shadow-sm"
                       >
-                        <span className="font-medium text-gray-900 text-sm truncate pr-2">
+                        <span className="font-medium text-gray-900 text-sm truncate pr-2 block sm:flex-1">
                           {qual.name}
                         </span>
-                        <span className="text-sm font-semibold text-blue-600 flex-shrink-0">
+                        <span className="text-sm font-semibold text-blue-600 flex-shrink-0 text-right sm:text-left">
                           {qual.institute}
                         </span>
                       </div>
