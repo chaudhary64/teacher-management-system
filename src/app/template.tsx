@@ -203,10 +203,16 @@ const TeacherManagementInterface: React.FC<React.PropsWithChildren<object>> = ({
               </div>
             </div>
             <div className="flex space-x-1">
-              <button aria-label="Settings" className="flex-1 p-1.5 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+              <button
+                aria-label="Settings"
+                className="flex-1 p-1.5 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+              >
                 <Settings size={16} className="mx-auto" />
               </button>
-              <button aria-label="Log out" className="flex-1 p-1.5 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+              <button
+                aria-label="Log out"
+                className="flex-1 p-1.5 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+              >
                 <LogOut size={16} className="mx-auto" />
               </button>
             </div>
@@ -239,7 +245,10 @@ const TeacherManagementInterface: React.FC<React.PropsWithChildren<object>> = ({
                 </div>
               </div>
               <div className="flex items-center space-x-1 sm:space-x-2">
-                <button aria-label="Notifications" className="p-2 hover:bg-gray-100 rounded-lg relative flex-shrink-0">
+                <button
+                  aria-label="Notifications"
+                  className="p-2 hover:bg-gray-100 rounded-lg relative flex-shrink-0"
+                >
                   <Bell size={18} className="text-gray-600" />
                   <span className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 bg-red-500 rounded-full flex items-center justify-center">
                     <span className="text-white text-xs font-bold">3</span>
